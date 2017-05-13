@@ -3,6 +3,7 @@ version: "3"
 services:
   dscheduler:
     image: ameier38/distributed:latest
+    build: .
     ports:
      - "8786:8786"
      - "8787:8787"
@@ -11,4 +12,5 @@ services:
 
   dworker:
     image: ameier38/distributed:latest
+    build: .
     command: start-dworker.sh
