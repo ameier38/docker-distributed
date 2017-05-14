@@ -6,11 +6,11 @@ services:
     build: .
     ports:
      - "8786:8786"
-     - "8787:8787"
-    command: start-dscheduler.sh
+    command: dask-scheduler --host dscheduler
     container_name: dscheduler
 
   dworker:
     image: ameier38/distributed:latest
     build: .
-    command: start-dworker.sh
+    env_file: worker.env
+    command: dask-worker dscheduler:8786
