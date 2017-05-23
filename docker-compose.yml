@@ -9,16 +9,20 @@ services:
      - "8787:8787"
      - "9786:9786"
     command: bash -c "source activate py3 && dask-scheduler --host dscheduler"
-    container_name: dscheduler
-    deploy:
-      constraints:
-        - node.role == manager
+    networks:
+      - distributed
 
   dworker:
     image: peeriq/distributed:latest
     build: .
     env_file: worker.env
     command: bash -c "source activate py3 && dask-worker dscheduler:8786"
-    deploy:
-      constraints:
-        - node.role == worker
+    networks:
+      - distributed
+
+  networks: 
+    distibuted:
+      driver: overlay
+      ipam:
+        config:
+          - subnet: 50.0.0.0/24
