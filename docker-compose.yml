@@ -2,15 +2,17 @@ version: "3"
 
 services:
   dscheduler:
-    image: ameier38/distributed:latest
+    image: peeriq/distributed:latest
     build: .
     ports:
      - "8786:8786"
-    command: dask-scheduler --host dscheduler
+     - "8787:8787"
+     - "9786:9786"
+    command: bash -c "source activate py3 && dask-scheduler --host dscheduler"
     container_name: dscheduler
 
   dworker:
-    image: ameier38/distributed:latest
+    image: peeriq/distributed:latest
     build: .
     env_file: worker.env
-    command: dask-worker dscheduler:8786
+    command: bash -c "source activate py3 && dask-worker dscheduler:8786"
