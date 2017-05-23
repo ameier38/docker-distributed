@@ -8,21 +8,29 @@ services:
      - "8786:8786"
      - "8787:8787"
      - "9786:9786"
-    command: bash -c "source activate py3 && dask-scheduler --host dscheduler"
+    command: bash -c "source activate py3 && dask-scheduler --host scheduler"
     networks:
-      - distributed
+      distributed:
+        aliases:
+          - scheduler
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
 
   dworker:
     image: peeriq/distributed:latest
     build: .
     env_file: worker.env
-    command: bash -c "source activate py3 && dask-worker dscheduler:8786"
+    command: bash -c "source activate py3 && dask-worker scheduler:8786"
     networks:
-      - distributed
+      distributed:
+        aliases:
+          - worker
 
 networks: 
   distributed:
-    # driver: overlay
+    driver: overlay
     ipam:
       config:
         - subnet: 50.0.0.0/24
