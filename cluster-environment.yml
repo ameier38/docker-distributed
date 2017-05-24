@@ -1,0 +1,14 @@
+name: py3
+channels: !!python/tuple
+- !!python/unicode
+  'defaults'
+dependencies:
+- numpy=1.12.1
+- pandas=0.20.1
+- psutil=5.2.2
+- bokeh=0.12.5
+- pip:
+  - cloudpickle==0.2.2
+  - dask==0.14.3
+  - distributed==1.16.3
+  - s3fs==0.1.0
