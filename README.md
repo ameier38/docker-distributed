@@ -31,16 +31,18 @@ conda env update -f client-environment.yml
 activate py3
 ```
 
-6) Start a Jupyter notebook
+6) Start a Jupyter notebook.
 ```commandline
 jupyter notebook
 ```
 
-7) Open `Example.ipynb`
+7) Open `Example.ipynb`.
+
+8) Open the diagnostic page at `localhost:8787` to view the workers in real-time.
 
 ## Cluster Set Up
 1) Create three EC2 instances on AWS with Python3, Miniconda, and Docker installed.
-2) SSH onto one of the instances using the following
+2) SSH onto one of the instances using the following:
 ```commandline
 ssh -i path/to/key.pem ubuntu@[instance address]
 ```
@@ -55,7 +57,9 @@ docker swarm init --advertise-addr [instance address]
 docker swarm join --token [TOKEN] [instance address]:2377
 ```
 
-5) SSH onto the manager instance (step (1))
+5) SSH onto each of the worker instances and enter the command from step (4).
+
+6) SSH back onto the manager node from step (2).
 
 6) Clone the repo.
 ```commandline
@@ -68,3 +72,7 @@ anything. I used `distributed` in this case.
 ```commandline
 docker stack deploy --compose-file docker-compose.yml --with-registry-auth distributed
 ```
+
+8) Get on the client machine and start at step (5) from Local Set Up.
+
+9) The diagnostic page will instead be at the manager IP on port 8787.

@@ -30,7 +30,7 @@ services:
 
 networks: 
   distributed:
-    # driver: overlay
+    driver: overlay
     ipam:
       config:
         - subnet: 50.0.0.0/24
