@@ -76,3 +76,19 @@ docker stack deploy --compose-file docker-compose.yml --with-registry-auth distr
 8) Get on the client machine and start at step (5) from Local Set Up.
 
 9) The diagnostic page will instead be at the manager IP on port 8787.
+
+## Network Diagnostic Commands
+```commandline
+apt-get install net-tools
+netstat -tulpn
+```
+
+```commandline
+apt-get install lsof
+lsof -i
+```
+
+```commandline
+apt-get install telnet
+telnet scheduler 8786
+```
