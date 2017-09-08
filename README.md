@@ -73,6 +73,14 @@ anything. I used `distributed` in this case.
 docker stack deploy --compose-file docker-compose.yml --with-registry-auth distributed
 ```
 
+8) Scale the workers.
+```commandline
+# get the name of the service
+docker service ls
+# scale the service to desired number of nodes
+docker service scale distributed_dworker=3
+```
+
 8) Get on the client machine and start at step (5) from Local Set Up.
 
 9) The diagnostic page will instead be at the manager IP on port 8787.

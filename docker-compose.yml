@@ -3,7 +3,9 @@ version: "3"
 services:
   dscheduler:
     image: peeriq/distributed:latest
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile-cluster
     ports:
      - "8786:8786"
      - "8787:8787"
@@ -17,10 +19,11 @@ services:
       placement:
         constraints:
           - node.role == manager
-
   dworker:
     image: peeriq/distributed:latest
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile-cluster
     env_file: worker.env
     command: start-workers.sh
     networks:
@@ -30,7 +33,7 @@ services:
 
 networks: 
   distributed:
-    driver: overlay
+    # driver: overlay
     ipam:
       config:
         - subnet: 50.0.0.0/24

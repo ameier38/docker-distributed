@@ -1,0 +1,4 @@
+FROM jupyter/base-notebook
+COPY client-requirements.txt .
+RUN conda install --yes --file client-requirements.txt
+COPY Example.ipynb .
